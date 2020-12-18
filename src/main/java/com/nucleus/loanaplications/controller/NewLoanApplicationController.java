@@ -1,6 +1,6 @@
 package com.nucleus.loanaplications.controller;
 
-import com.nucleus.customerservice.loandisbursal.model.LoanApplication;
+import com.nucleus.loanaplications.model.LoanApplications;
 import com.nucleus.loanaplications.service.NewLoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -22,7 +22,7 @@ public class NewLoanApplicationController {
     }
 
     @PostMapping(value = "/newLoanApplication")
-    public ModelAndView createNewLoanApplication(LoanApplication loanApplication, BindingResult result){
+    public ModelAndView createNewLoanApplication(LoanApplications loanApplication, BindingResult result){
         newLoanApplicationService.addLoanApplication(loanApplication);
         ModelAndView modelAndView = new ModelAndView("view/loanApplocation/notDecide");////// TO:DO
         return modelAndView;

@@ -1,22 +1,77 @@
 package com.nucleus.loanaplications.model;
 
+
 import com.nucleus.customer.model.Customer;
 import com.nucleus.product.model.Product;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "loan_application")
-public class LoanApplications {
-
+@Table( name= "loan_application")
+public class LoanApplications implements Serializable {
     @Id
-    @Column(name = "loan_application_number")
-    private Integer loanApplicationNumber;
+    @Column(name = "loan_application_number",length = 10,nullable = false)
+    private int loanApplicationNumber;
 
+    //FK
     @ManyToOne
     @JoinColumn(name = "customer_code", referencedColumnName = "customer_code",nullable = false)
     private Customer customerCode;
+
+    //FK
+    @ManyToOne
+    @JoinColumn(name = "product_code",referencedColumnName = "product_code",nullable = false)
+    private Product productCode;
+
+    @Column(name = "loan_amount_requested",nullable = false)
+    private int loanAmountRequested;
+
+    @Column(name = "tenure",length = 3,nullable = false)
+    private int tenure;
+
+    @Column(name = "rate",length = 2,nullable = false)
+    private int rate;
+
+    @Column(name = "agreement_date",nullable = false)
+    private LocalDate agreementDate;
+
+    @Column(name = "installment_due_date",nullable = false)
+    private LocalDate installmentDueDate;
+
+    @Column(name = "create_date")
+    private LocalDate createDate;
+
+    @Column(name = "created_by", length = 30)
+    private String createdBy;
+
+    @Column(name = "modified_date")
+    private LocalDate modifiedDate;
+
+    @Column(name = "modified_by", length = 30)
+    private String modifiedBy;
+
+    @Column(name = "authorized_date")
+    private LocalDate authorizedDate;
+
+    @Column(name = "authorized_by", length = 30)
+    private String authorizedBy;
+
+    // Getter and setter
+
+    public int getLoanApplicationNumber() {
+        return loanApplicationNumber;
+    }
+
+    public void setLoanApplicationNumber(int loanApplicationNumber) {
+        this.loanApplicationNumber = loanApplicationNumber;
+    }
 
     public Customer getCustomerCode() {
         return customerCode;
@@ -26,68 +81,27 @@ public class LoanApplications {
         this.customerCode = customerCode;
     }
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_code", referencedColumnName = "product_code",nullable = false)
-    private Product productCode;
-
-    @Column(name = "loan_amount_requested",nullable = false)
-    private Integer loanAmountRequested;
-
-    @Column(name = "tenure",nullable = false)
-    private Integer tenure;
-
-    @Column(name = "rate",nullable = false)
-    private Integer rate;
-
-    @Column(name = "agreement_date",nullable = false)
-    private LocalDate agreementDate;
-
-    @Column(name = "installment_due_date",nullable = false)
-    private LocalDate installmentDueDate;
-
-    @Column(name = "create_date",nullable = false)
-    private LocalDate createDate;
-
-    @Column(name = "created_by", nullable = false, length = 30)
-    private String createdBy;
-
-    @Column(name = "modified_date",nullable = false)
-    private LocalDate modifiedDate;
-
-    @Column(name = "modified_by", nullable = false, length = 30)
-    private String modifiedBy;
-
-    @Column(name = "authorized_date",nullable = false)
-    private LocalDate authorizedDate;
-
-    @Column(name = "authorized_by", nullable = false, length = 30)
-    private String authorizedBy;
-
-    public Integer getLoanApplicationNumber() {
-        return loanApplicationNumber;
+    public int getLoanAmountRequested() {
+        return loanAmountRequested;
     }
 
-    public void setLoanApplicationNumber(Integer loanApplicationNumber) {
-        this.loanApplicationNumber = loanApplicationNumber;
+    public void setLoanAmountRequested(int loanAmountRequested) {
+        this.loanAmountRequested = loanAmountRequested;
     }
 
-    public Product getProductCode() {
-        return productCode;
-    }
-
-    public Integer getTenure() {
+    public int getTenure() {
         return tenure;
     }
 
-    public void setTenure(Integer tenure) {
+    public void setTenure(int tenure) {
         this.tenure = tenure;
     }
 
-    public Integer getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(Integer rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
@@ -95,8 +109,8 @@ public class LoanApplications {
         return agreementDate;
     }
 
-    public void setAgreementDate(LocalDate agreement_date) {
-        this.agreementDate = agreement_date;
+    public void setAgreementDate(LocalDate agreementDate) {
+        this.agreementDate = agreementDate;
     }
 
     public LocalDate getInstallmentDueDate() {
@@ -155,15 +169,31 @@ public class LoanApplications {
         this.authorizedBy = authorizedBy;
     }
 
+    public Product getProductCode() {
+        return productCode;
+    }
+
     public void setProductCode(Product productCode) {
         this.productCode = productCode;
     }
 
-    public Integer getLoanAmountRequested() {
-        return loanAmountRequested;
-    }
-
-    public void setLoanAmountRequested(Integer loanAmountRequested) {
-        this.loanAmountRequested = loanAmountRequested;
+    @Override
+    public String toString() {
+        return "LoanApplication{" +
+                "loanApplicationNumber=" + loanApplicationNumber +
+                ", customerCode=" + customerCode +
+                ", productCode=" + productCode +
+                ", loanAmountRequested=" + loanAmountRequested +
+                ", tenure=" + tenure +
+                ", rate=" + rate +
+                ", agreementDate=" + agreementDate +
+                ", installmentDueDate=" + installmentDueDate +
+                ", createDate=" + createDate +
+                ", createdBy='" + createdBy + '\'' +
+                ", modifiedDate=" + modifiedDate +
+                ", modifiedBy='" + modifiedBy + '\'' +
+                ", authorizedDate=" + authorizedDate +
+                ", authorizedBy='" + authorizedBy + '\'' +
+                '}';
     }
 }

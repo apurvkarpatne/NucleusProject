@@ -1,12 +1,8 @@
 package com.nucleus.loanclosurebod.model;
 
-import com.nucleus.customerservice.loandisbursal.model.Customer;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;

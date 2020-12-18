@@ -47,7 +47,7 @@
 	<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-3">
-					<form action="/customerloandisbursal" method="get" >
+					<form action="customerloandisbursal" method="get" >
 					<div class="form-group">
 						<label class="font-weight-bold ">Customer Code#</label>
 						<input type="text" class="form-control" name="customerCode" placeholder="Enter customer_Id here..." requored="required" /><input type="submit" value="Submit">
@@ -56,7 +56,7 @@
 				</div>
 				
 				<div class="col-sm-3 offset-sm-4">
-					<form action="/loandisbursalDetails" method="get">
+					<form action="loandisbursalDetails" method="get">
 					<div class="form-group">
 						<label class="font-weight-bold ">Loan Application#</label>
 						<input type="text" class="form-control" name="loanApplicationNumber" required placeholder="Enter LoanApp_Id here..."/><input type="submit" value="Submit">

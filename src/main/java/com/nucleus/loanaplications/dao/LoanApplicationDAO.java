@@ -1,6 +1,6 @@
 package com.nucleus.loanaplications.dao;
 
-import com.nucleus.customerservice.loandisbursal.model.LoanApplication;
+import com.nucleus.loanaplications.model.LoanApplications;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,12 +26,12 @@ public class LoanApplicationDAO implements LoanApplicationDaoInterface {
     }
 
     @Override
-    public boolean addApplication(LoanApplication loanApplication) {
+    public boolean addApplication(LoanApplications loanApplication) {
         return false;
     }
 
     @Override
-    public List<LoanApplication> getLoanApplicationList() {
+    public List<LoanApplications> getLoanApplicationList() {
         return null;
     }
 }

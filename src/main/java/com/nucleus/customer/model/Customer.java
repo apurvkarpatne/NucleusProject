@@ -1,39 +1,68 @@
 package com.nucleus.customer.model;
+
+import com.nucleus.loanaplications.model.LoanApplications;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
+import javax.persistence.EnumType;
+import javax.persistence.FetchType;
+import javax.validation.constraints.Min;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+
 @Entity
-@Table( name= "customer")
-public class Customer {
+@Table(name = "customer")
+public class Customer implements Serializable {
 
     @Id
-    @Column(name="customer_code",length = 20,nullable = false)
-    private String customerCode;
+    @Column(name = "customer_code", length = 20,nullable = false)
+    public String customerCode;
 
-    @Column(name="first_name",length = 30,nullable = false)
+    @Column(name = "first_name", length = 30, nullable = false)
     private String firstName;
 
-    @Column(name="last_name",length = 30,nullable = false)
+    @Column(name = "last_name", length = 30, nullable = false)
     private String lastName;
 
-    @Column(name="date_of_birth", nullable = false)
+    @Column(name = "date_of_birth", nullable = false)
     private LocalDate dateOfBirth;
 
-    @Column(name="nationality",length = 30, nullable = false)
-    private String nationality;
+    public enum OccupationType {
+        Salaried, SelfEmployed;
+    }
 
-    @Column(name="occupation_type",length = 30, nullable = false)
-    private String occupationType;
+    public enum Nationality {
+        Indian, Canadian, American;
+    }
 
-    @Column(name="total_work_experience",length = 2)
-    private Integer totalWorkExperience;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nationality", length = 30, nullable = false)
+    private Nationality nationality;
 
-    @Column(name="organization_name",length = 30)
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "occupation_type", length = 30, nullable = false)
+    private OccupationType occupationType;
+
+    @Column(name = "total_work_experience", length = 2)
+    @Min(0)
+    private int totalWorkExperience;
+
+    @Column(name = "organization_name", length = 30)
     private String organizationName;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="customerCode")
+    private List<LoanApplications> allloanApplications;
 
+
+
+    // Getter and setter
     public String getCustomerCode() {
         return customerCode;
     }
@@ -66,27 +95,27 @@ public class Customer {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getNationality() {
+    public Nationality getNationality() {
         return nationality;
     }
 
-    public void setNationality(String nationality) {
+    public void setNationality(Nationality nationality) {
         this.nationality = nationality;
     }
 
-    public String getOccupationType() {
+    public OccupationType getOccupationType() {
         return occupationType;
     }
 
-    public void setOccupationType(String occupationType) {
+    public void setOccupationType(OccupationType occupationType) {
         this.occupationType = occupationType;
     }
 
-    public Integer getTotalWorkExperience() {
+    public int getTotalWorkExperience() {
         return totalWorkExperience;
     }
 
-    public void setTotalWorkExperience(Integer totalWorkExperience) {
+    public void setTotalWorkExperience(int totalWorkExperience) {
         this.totalWorkExperience = totalWorkExperience;
     }
 
@@ -96,5 +125,41 @@ public class Customer {
 
     public void setOrganizationName(String organizationName) {
         this.organizationName = organizationName;
+    }
+
+    public List<LoanApplications> getAllloanApplications() {
+        return allloanApplications;
+    }
+
+    public void setAllloanApplications(List<LoanApplications> allloanApplications) {
+        this.allloanApplications = allloanApplications;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerCode='" + customerCode + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", nationality=" + nationality +
+                ", occupationType=" + occupationType +
+                ", totalWorkExperience=" + totalWorkExperience +
+                ", organizationName='" + organizationName + '\'' +
+                ", allloanApplications=" + allloanApplications +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customers = (Customer) o;
+        return totalWorkExperience == customers.totalWorkExperience && customerCode.equals(customers.customerCode) && firstName.equals(customers.firstName) && lastName.equals(customers.lastName) && dateOfBirth.equals(customers.dateOfBirth) && nationality == customers.nationality && occupationType == customers.occupationType && Objects.equals(organizationName, customers.organizationName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerCode, firstName, lastName, dateOfBirth, nationality, occupationType, totalWorkExperience, organizationName);
     }
 }
