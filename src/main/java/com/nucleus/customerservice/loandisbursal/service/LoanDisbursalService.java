@@ -1,7 +1,7 @@
 package com.nucleus.customerservice.loandisbursal.service;
 
 import com.nucleus.customerservice.loandisbursal.database.LoanDisbursalDAO;
-import com.nucleus.loanaplications.model.LoanApplications;
+import com.nucleus.loanapplications.model.LoanApplications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

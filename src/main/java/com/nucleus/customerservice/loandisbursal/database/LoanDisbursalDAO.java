@@ -1,10 +1,9 @@
 package com.nucleus.customerservice.loandisbursal.database;
 
 import com.nucleus.customer.model.Customer;
-import com.nucleus.loanaplications.model.LoanApplications;
+import com.nucleus.loanapplications.model.LoanApplications;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +17,15 @@ public class LoanDisbursalDAO {
     public LoanApplications getLoanDetails(int loanApplicationNumber){
         Session session = sessionFactory.openSession();
         LoanApplications loanApplication = session.get(LoanApplications.class, loanApplicationNumber);
+        session.close();
         return loanApplication;
     }
 
     public List<LoanApplications> getCustomerLoanDetails(String customerCode){
         Session session = sessionFactory.openSession();
         Customer customer = session.get(Customer.class, customerCode);
-        return customer.getAllloanApplications();
+        List<LoanApplications> loanApplications=customer.getLoanApplications();
+        session.close();
+        return loanApplications;
     }
 }

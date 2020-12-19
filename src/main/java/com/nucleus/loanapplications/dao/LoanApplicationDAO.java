@@ -1,9 +1,10 @@
-package com.nucleus.loanaplications.dao;
+package com.nucleus.loanapplications.dao;
 
-import com.nucleus.loanaplications.model.LoanApplications;
+import com.nucleus.loanapplications.model.LoanApplications;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,12 +27,18 @@ public class LoanApplicationDAO implements LoanApplicationDaoInterface {
     }
 
     @Override
-    public boolean addApplication(LoanApplications loanApplication) {
+    public boolean addApplication(LoanApplications loanApplications) {
         return false;
     }
 
-    @Override
-    public List<LoanApplications> getLoanApplicationList() {
-        return null;
+    public List<LoanApplications> getLoanApplicationList(){
+        try(Session session = getSession()) {
+            session.beginTransaction();
+            Query<LoanApplications> query = session.createQuery("from LoanApplications");
+            List<LoanApplications> loanApplicationsList = query.list();
+            session.getTransaction().commit();
+            return loanApplicationsList;
+        }
     }
+
 }

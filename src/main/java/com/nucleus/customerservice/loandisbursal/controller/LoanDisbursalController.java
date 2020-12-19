@@ -2,8 +2,9 @@ package com.nucleus.customerservice.loandisbursal.controller;
 
 import com.nucleus.customerservice.loandisbursal.exceptions.CustomerNotFoundException;
 import com.nucleus.customerservice.loandisbursal.exceptions.LoanApplicationNotFoundException;
-import com.nucleus.loanaplications.model.LoanApplications;
+
 import com.nucleus.customerservice.loandisbursal.service.LoanDisbursalService;
+import com.nucleus.loanapplications.model.LoanApplications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

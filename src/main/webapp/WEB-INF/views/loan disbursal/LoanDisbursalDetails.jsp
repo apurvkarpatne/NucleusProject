@@ -43,11 +43,11 @@
 			<table id="example" class="table table-striped table-bordered display" style="width:100%">
 		        <thead>
 		            <tr>
-		                <th>Loan Application Id</th>
+		                <th>Loan Application Number</th>
 		                <th>Loan Amount</th>
 		                <th>Disbursal Date</th>
 		                <th>Tenure</th>
-		                <th>Rate</th>
+		                <th>AuthorizedBy</th>
 		                <th>Agreement Date</th>
 		            </tr>
 		        </thead>
@@ -57,7 +57,7 @@
 		                <td><c:out value="${loanApp.loanAmountRequested}" /></td>
 		                <td><c:out value="${loanApp.authorizedDate}" /></td>
 		                <td><c:out value="${loanApp.tenure}" /></td>
-		                <td><c:out value="${loanApp.rate}" /></td>
+		                <td><c:out value="${loanApp.authorizedBy}" /></td>
 		                <td><c:out value="${loanApp.agreementDate}" /></td>
 		            </tr>
 		        </tbody>
