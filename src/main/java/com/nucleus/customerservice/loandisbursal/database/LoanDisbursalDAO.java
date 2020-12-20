@@ -23,8 +23,11 @@ public class LoanDisbursalDAO {
 
     public List<LoanApplications> getCustomerLoanDetails(String customerCode){
         Session session = sessionFactory.openSession();
+        List<LoanApplications> loanApplications=null;
         Customer customer = session.get(Customer.class, customerCode);
-        List<LoanApplications> loanApplications=customer.getLoanApplications();
+        if(customer != null) {
+            loanApplications=customer.getLoanApplications();
+        }
         session.close();
         return loanApplications;
     }

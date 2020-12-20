@@ -38,7 +38,7 @@ public class LoanDisbursalController {
     public ModelAndView getLoanDisbursalsByCustomerId(@RequestParam("customerCode") String customerId){
         List<LoanApplications> loanApplications=null;
         loanApplications = loanDisbursalService.getCustomerLoanDetails(customerId);
-        if(loanApplications.isEmpty()){
+        if(loanApplications==null){
             return new ModelAndView("views/loan disbursal/ErrorPage", "Message", "CustomerCode NOT found: "+ customerId);
         }
         return new ModelAndView("views/loan disbursal/CustomerLoanDisbursal", "allLoanApps", loanApplications);
