@@ -35,7 +35,7 @@ public class Customer {
     @Column(name="organization_name",length = 30)
     private String organizationName;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="customerCode")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="customerCode")
     private List<LoanApplications> loanApplications;
 
 
