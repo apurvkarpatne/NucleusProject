@@ -23,15 +23,21 @@ public class EligibilityParameterController {
     @Autowired
     private EligibilityParameterService eligibilityParameterService;
 
-    @RequestMapping("/getmaker")
-    public String getParametersMaker(Model model) {
+    /**
+     * Getting All eligibility parameters from database in maker and checker screens
+     */
+    @RequestMapping("/eligibilityparameter")
+    public String getParameters(Model model) {
         System.out.println("kirtika");
         List<EligibilityParameter>list= eligibilityParameterService.getAll();
         model.addAttribute("parameters",list);
         System.out.println(list);
-        return "views/eligibilityparameters/parameterMaker";
+        return "views/eligibilityparameters/viewEligibilityParameters";
     }
 
+    /**
+     * Creating a new Eligibility Parameter in maker screen
+     */
     @GetMapping("/createparameter")
     public String createParameter(Model model){
         EligibilityParameter eligibilityParameter = new EligibilityParameter();
@@ -40,6 +46,9 @@ public class EligibilityParameterController {
         return "views/eligibilityparameters/createParameter";
     }
 
+    /**
+     * Saving a Parameter in database
+     */
     @RequestMapping(value = "/insertparameter", params = "action1",method = RequestMethod.POST)
     public String saveParameter(@Valid @ModelAttribute("eligibilityParameter") EligibilityParameter eligibilityParameter, BindingResult br){
         if(br.hasErrors())
@@ -57,6 +66,9 @@ public class EligibilityParameterController {
 
     }
 
+    /**
+     * Saving parameter in database and requesting for approval by checker
+     */
     @RequestMapping(value = "/insertparameter", params = "action2",method = RequestMethod.POST)
     public String saveAndRequestApproval(@Valid @ModelAttribute("eligibilityParameter")EligibilityParameter eligibilityParameter,BindingResult br){
         if(br.hasErrors())
@@ -74,12 +86,12 @@ public class EligibilityParameterController {
 
     }
 
+    /**
+     * Editing an Eligibility Parameter and saving it into database
+     */
     @RequestMapping(value = "/edit/editparameter", params = "action1",method = RequestMethod.POST)
     public String editParameter1(@Valid @ModelAttribute("eligibilityParameter1")EligibilityParameter eligibilityParameter,BindingResult br){
 
-        /*String code=eligibilityParameter.getParameterCode();
-        System.out.println("kk");
-        System.out.println(code);*/
         if(br.hasErrors())
         {
             return "views/eligibilityparameters/editParameter";
@@ -90,7 +102,6 @@ public class EligibilityParameterController {
             eligibilityParameter.setStatus("Inactive");
             boolean valid=eligibilityParameterService.editParameter(eligibilityParameter);
 
-            System.out.println("action1");
             if(valid==true)
             {
                 System.out.println("true");
@@ -106,6 +117,9 @@ public class EligibilityParameterController {
 
     }
 
+    /**
+     * Editing an eligibility parameter and saving it into database and requesting a approval by checker
+     */
     @RequestMapping(value = "/edit/editparameter", params = "action2",method = RequestMethod.POST)
     public String editParameter2(@Valid @ModelAttribute("eligibilityParameter1")EligibilityParameter eligibilityParameter,BindingResult br){
         if(br.hasErrors())
@@ -118,7 +132,6 @@ public class EligibilityParameterController {
             eligibilityParameter.setStatus("Pending");
             boolean valid=eligibilityParameterService.editParameter(eligibilityParameter);
 
-            System.out.println("action1");
             if(valid==true)
             {
                 System.out.println("true");
@@ -134,23 +147,19 @@ public class EligibilityParameterController {
 
     }
 
-    @RequestMapping("/getchecker")
-    public String getParametersChecker(Model model) {
-        System.out.println("kirtika");
-        List<EligibilityParameter>list= eligibilityParameterService.getAll();
-        model.addAttribute("parameters",list);
-        System.out.println(list);
-        return "views/eligibilityparameters/parameterChecker";
-    }
-
+    /**
+     * Deleting a particular eligibility parameter from database
+     */
     @RequestMapping("/delete/{parameterCode}")
-    public String deleteParameter(@PathVariable("parameterCode") String parameterCode, Model model) {
-        boolean deleteStatus = eligibilityParameterService.deleteEligibilityParameter(parameterCode);
-        model.addAttribute("deleteStatus", deleteStatus);
-        return "redirect:/main/getmaker/";
+    public String deleteParameter(@PathVariable("parameterCode") String parameterCode) {
+        String pcode = eligibilityParameterService.deleteEligibilityParameter(parameterCode);
+        return "redirect:/main/eligibilityparameter/";
 
     }
 
+    /**
+     * Edit parameter screen
+     */
     @RequestMapping("/edit/{parameterCode}")
     public ModelAndView editParameter(@PathVariable("parameterCode") String parameterCode,Model model){
 
@@ -163,6 +172,9 @@ public class EligibilityParameterController {
 
     }
 
+    /**
+     * Getting a single parameter from database for approval or rejection
+     */
     @GetMapping(value = {"/get/{parameterCode}"})
     public ModelAndView showOneEligibilityParameter(@PathVariable("parameterCode") String parameterCode) {
         ModelAndView modelAndView = new ModelAndView();
@@ -172,6 +184,9 @@ public class EligibilityParameterController {
         return modelAndView;
     }
 
+    /**
+     * Updating status of a particular eligibility parameter as updated or rejected into database
+     */
     @PostMapping(value = {"/updateStatus/{parameterCode}"})
     public String updateStatus(@PathVariable("parameterCode") String parameterCode, @RequestParam("action")String action, Model model) {
         String newStatus;
@@ -183,7 +198,7 @@ public class EligibilityParameterController {
             newStatus = "Pending";
         System.out.println(newStatus);
         boolean updateStatus = eligibilityParameterService.updateStatus(parameterCode, newStatus);
-        return "redirect:/main/getchecker/";
+        return "redirect:/main/eligibilityparameter/";
     }
 
 }

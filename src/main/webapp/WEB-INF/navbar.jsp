@@ -38,9 +38,7 @@
                         Parameters
                     </a>
                     <div class="dropdown-menu sm-menu">
-                        <a class="dropdown-item" href="main/getmaker">Maker</a>
-                        <a class="dropdown-item" href="main/getchecker">Checker</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/main/eligibilityparameter">Eligibility Parameter</a>
                     </div>
                 </li>
 
