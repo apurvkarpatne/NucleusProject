@@ -38,8 +38,7 @@
                         Parameters
                     </a>
                     <div class="dropdown-menu sm-menu">
-                        <a class="dropdown-item" href="main/getmaker">Maker</a>
-                        <a class="dropdown-item" href="main/getchecker">Checker</a>
+                        <a class="dropdown-item" href="<%= request.getContextPath()%>/main/eligibilityparameter">Eligibility Parameter</a>
                         <sec:authorize access = "hasRole('MAKER')">
                             <a class="dropdown-item" href="charges/makerList">Charge Maker</a>
                         </sec:authorize>
