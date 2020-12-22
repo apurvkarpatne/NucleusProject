@@ -152,12 +152,14 @@ public class EligibilityParameterDAOImpl implements EligibilityParameterDAO {
 
     }
 
-    public boolean updateStatus(String parameterCode, String newStatus) {
+    public boolean updateStatus(String parameterCode, String newStatus,String authorizedBy) {
         boolean updateStatus;
         try {
             Session session = getSession();
             session.beginTransaction();
             EligibilityParameter eligibilityParameter = getOneEligibilityParameter(parameterCode);
+            eligibilityParameter.setAuthorizedBy(authorizedBy);
+            eligibilityParameter.setAuthorizedDate(LocalDate.now());
             eligibilityParameter.setStatus(newStatus);
             session.update(eligibilityParameter);
             session.getTransaction().commit();

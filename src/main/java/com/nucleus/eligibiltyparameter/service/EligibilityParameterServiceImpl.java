@@ -40,8 +40,8 @@ public class EligibilityParameterServiceImpl implements EligibilityParameterServ
     }
 
     @Override
-    public boolean updateStatus(String parameterCode,String newStatus)
+    public boolean updateStatus(String parameterCode,String newStatus,String authorizedBy)
     {
-        return eligibilityParameterDao.updateStatus(parameterCode,newStatus);
+        return eligibilityParameterDao.updateStatus(parameterCode,newStatus,authorizedBy);
     }
 }

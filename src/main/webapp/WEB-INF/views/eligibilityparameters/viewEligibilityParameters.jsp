@@ -64,12 +64,24 @@
     		        <tbody>
     		        <c:forEach items="${parameters}" var="parameter">
     		            <tr>
-    		            <sec:authorize access="hasRole('MAKER')">
-    		                <td><c:out value="${parameter.parameterCode}" /></td>
-    		                </sec:authorize>
-    		                <sec:authorize access="hasRole('CHECKER')">
-    		                <td><a href="<%= request.getContextPath()%>/main/get/${parameter.parameterCode}"> ${parameter.parameterCode}</a></td>
-                            </sec:authorize>
+    		            <td>
+                         <security:authorize access="hasRole('CHECKER')">
+                         <c:if test = "${parameter.status ne 'Inactive'}">
+                         <a href="<%= request.getContextPath()%>/main/get/${parameter.parameterCode}">
+                            ${parameter.parameterCode}
+                         </a>
+                         </c:if>
+                         <c:if test = "${parameter.status == 'Inactive'}">
+                         ${parameter.parameterCode}
+                         </c:if>
+                         </security:authorize>
+                         <security:authorize access="hasRole('MAKER')">
+                         ${parameter.parameterCode}
+                         </security:authorize>
+                         <security:authorize access="isAnonymous()">
+                         ${parameter.parameterCode}
+                         </security:authorize>
+                         </td>
     		                <td><c:out value="${parameter.parameterName}" /></td>
     		                <td><c:out value="${parameter.parameterDescription}" /></td>
     		                <td><c:out value="${parameter.createdBy}" /></td>

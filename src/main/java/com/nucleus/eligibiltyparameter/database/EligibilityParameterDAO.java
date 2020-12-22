@@ -11,5 +11,5 @@ public interface EligibilityParameterDAO {
     public EligibilityParameter getOneEligibilityParameter(String parameterCode);
     public String deleteEligibilityParameter(String parameterCode);
     public boolean editParameter(EligibilityParameter eligibilityParameter);
-    public boolean updateStatus(String parameterCode,String newStatus);
+    public boolean updateStatus(String parameterCode,String newStatus,String authorizedBy);
 }
