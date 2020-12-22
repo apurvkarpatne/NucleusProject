@@ -15,11 +15,11 @@ public class LoanDisbursalLoggerAspect {
 
     @After("execution (* com.nucleus.customerservice.loandisbursal.controller.LoanDisbursalController.getLoanDisbursals(..))")
     public void fetchbyLonaId(JoinPoint joinPoint) {
-        LOGGER.info("Loan Disbursal Details fetched by LoanApplicationNumber");
+        LOGGER.info("Loan Disbursal Details fetched by LoanApplicationNumber", joinPoint);
     }
 
     @After("execution (* com.nucleus.customerservice.loandisbursal.controller.LoanDisbursalController.getLoanDisbursalsByCustomerId(..))")
     public void fetchbyCustomerId(JoinPoint joinPoint) {
-        LOGGER.info("Loan Disbursal Details fetched by customerCode");
+        LOGGER.info("Loan Disbursal Details fetched by customerCode", joinPoint);
     }
 }
