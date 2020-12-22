@@ -93,11 +93,16 @@ public class AppConfig {
 //        ds.setUsername("MYUSERNAME");
 //        ds.setPassword("MYPASSWORD");
 
+        ds.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
+        ds.setUsername("megha");
+        ds.setPassword("megha");
+
+
           /*   ds.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
              ds.setUsername("system");
              ds.setPassword("hemant12345");*/
 
-            return ds;
+        return ds;
 
     }
 
