@@ -41,7 +41,7 @@ public class Receipt {
     private String receiptType;
 
     @NotNull(message = "Date of Receipt cannot be blank")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "dd/MM/yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "yyyy-MM-dd")
     @Column(name="date_of_receipt")
     private LocalDate dateOfReceipt;
 
@@ -93,14 +93,9 @@ public class Receipt {
     @Min(value = 0, message = "Loan Application Number must be positive")
     private String loanApplicationValue;
 
-    public String getLoanApplicationValue(){
-        return loanApplicationValue;
-    }
 
-    public void setLoanApplicationValue(String loanApplicationValue) {
-        this.loanApplicationValue = loanApplicationValue;
-    }
-
+    @Column(name="receipt_status")
+    private String receiptStatus;
 
 
     public Receipt() {
@@ -234,5 +229,20 @@ public class Receipt {
         this.authorizedBy = authorizedBy;
     }
 
+    public String getReceiptStatus() {
+        return receiptStatus;
+    }
+
+    public void setReceiptStatus(String receiptStatus) {
+        this.receiptStatus = receiptStatus;
+    }
+
+    public String getLoanApplicationValue(){
+        return loanApplicationValue;
+    }
+
+    public void setLoanApplicationValue(String loanApplicationValue) {
+        this.loanApplicationValue = loanApplicationValue;
+    }
 
 }

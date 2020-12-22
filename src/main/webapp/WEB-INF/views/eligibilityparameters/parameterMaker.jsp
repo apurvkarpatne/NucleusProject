@@ -5,7 +5,7 @@
 <%@ include file = "/navbar.jsp"%>
 <html>
 <head>
-<title>Allocation Policy Creator</title>
+<title>Eligibility Parameter Maker</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
@@ -20,14 +20,7 @@
 		    $('#example').DataTable();
 		} );
 	</script>
-	<style>
-    a {
-      color: white;
-    }
-    a:hover {
-      color: white;
-    }
-    </style>
+
 </head>
 <body>
 
@@ -40,7 +33,7 @@
 			 </b>
 		</h2>
 <div class=" px-4 mt-0 align-self-end ">
-			<button type="button" class="btn btn-primary"><a href="createparameter">New Eligibility Parameter</a></button>
+			<a class="btn btn-primary" href="<%= request.getContextPath()%>/main/createparameter">New Eligibility Parameter</a>
 		</div>
 
 	</div>
@@ -75,7 +68,7 @@
     		                <td><c:out value="${parameter.createdBy}" /></td>
     		                <td><c:out value="${parameter.status}" /></td>
     		                <td><c:out value="${parameter.authorizedBy}" /></td>
-    		                <td><button type="button" class="btn-xs btn-info">Edit</button> <button type="button" class="btn-xs btn-danger">Delete</button></td>
+    		                <td><a href="<%= request.getContextPath()%>/main/edit/${parameter.parameterCode}">Edit</a>  |  <a href="<%= request.getContextPath()%>/main/delete/${parameter.parameterCode}">Delete</a></td>
     		            </tr>
 
                     </c:forEach>
